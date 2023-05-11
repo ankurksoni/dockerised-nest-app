@@ -1,0 +1,28 @@
+services:
+
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres", "-d", "db_prod"]
+      interval: 20s
+      timeout: 10s
+      retries: 2
+
+  nest-app:
+    image: nest-cloud-run
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      db:
+        condition: "service_healthy"
+    healthcheck:
+      test: curl http://localhost:3000/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 2
