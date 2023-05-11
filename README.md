@@ -33,8 +33,8 @@ $ yarn run build
     * CHECK HEALTH : `curl --request GET --url http://localhost:3000/health --header 'Content-Type: application/json'`
     * CREATE COFFEE ITEM: `curl --request POST --url http://localhost:3000/coffees --header 'Content-Type: application/json' --data '{"name": "random 123", "brand": "buddy brew", "flavor": ["orange", "mango"]}'`
     * GET ALL ITEMS: `curl --request GET --url http://localhost:3000/coffees --header 'Content-Type: application/json'`
-    * GET SPECIFIC ITEM: `curl --request GET --url http://localhost:3000/coffees --header 'Content-Type: application/json'`
-    * DELETE ITEM: `curl --request DELETE --url http://localhost:3000/coffees/2 --header 'Content-Type: application/json'`
+    * GET SPECIFIC ITEM: `curl --request GET --url http://localhost:3000/coffees/1 --header 'Content-Type: application/json'`
+    * DELETE ITEM: `curl --request DELETE --url http://localhost:3000/coffees/1 --header 'Content-Type: application/json'`
 * To restart as fresh container run below command,
 
     * `docker rmi $(docker images -f "dangling=true" -q); docker system prune; docker build -t nest-cloud-run --no-cache .`
