@@ -5,10 +5,11 @@
 ## Description
 
 We used,
-1. [Nest](https://github.com/nestjs/nest) framework, 
+1. [Nest](https://github.com/nestjs/nest) framework,"Nest js" boilerplate ready with schema entity connected and running end-to-end with Postgres docker container.
 2. `Dockerfile` with best practice like HEALTHCHECK, multi-stage etc. to be deployed on production.
 3. `docker-compose.yml` file to start containers in most hassle-free way.
-4. We have provided the `insomnia API`(`Insomnia_APIs.json`) list for you to try it out at your end.
+4. Docker containers enriched with "PM2" capabilities, Healthchecks, etc. 
+5. We have provided the `insomnia API`(`Insomnia_APIs.json`) list for you to try it out at your end.
 
 ## Pre-requisite
 
@@ -40,6 +41,9 @@ $ yarn run build
     * `docker rmi $(docker images -f "dangling=true" -q); docker system prune; docker build -t nest-cloud-run --no-cache .`
 * To debug the health situation for a process in docker container,
     * `docker inspect --format "{{json .State.Health }}" dockerised-nest-app_nest-app_1 | jq`
+
+* To shut down and remove docker container,
+    * `docker-compose down`
 
 ## Running the app: Manually
 
