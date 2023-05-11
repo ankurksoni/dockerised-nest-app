@@ -12,7 +12,9 @@ WORKDIR /usr/src/app
 # a package-lock.json file will not be generated.
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
-#COPY --chown=node:node src ./
+# COPY --chown=node:node src ./
+
+RUN npm i -g @nestjs/cli
 
 # This command will not install upgraded pkgs. for more visit link
 # https://stackoverflow.com/a/76219090/3296607
@@ -29,12 +31,16 @@ USER node
 
 FROM node:18-alpine As PROD
 
-# Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=PROD_BUILD_INTERMEDIATE /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=PROD_BUILD_INTERMEDIATE /usr/src/app/dist ./dist
+# Copy the bundled code from the PROD_BUILD_INTERMEDIATE stage to the PROD image
+COPY --chown=node:node --from=PROD_BUILD_INTERMEDIATE /usr/src/app/node_modules /opt/nest-app/node_modules
+COPY --chown=node:node --from=PROD_BUILD_INTERMEDIATE /usr/src/app/dist /opt/nest-app
+
+RUN apk add --no-cache curl
+RUN npm install pm2 -g
 
 EXPOSE 3000
 ENV NODE_ENV=production
 ENV AWS_NODEJS_CONNECTION_REUSE_ENABLED=1
 
-CMD ["node", "dist/src/main.js"]
+# CMD ["node", "/opt/nest-app/main.js"]
+CMD ["pm2-runtime", "/opt/nest-app/main.js"]

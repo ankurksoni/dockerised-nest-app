@@ -3,7 +3,12 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
+
+  @Get('/health')
+  getHealth(): string {
+    return `I am healthy. Memory details: ${process.memoryUsage().heapUsed / 1024 / 1024} MB`;
+  }
 
   @Get()
   getHello(): string {
