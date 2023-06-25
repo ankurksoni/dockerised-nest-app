@@ -2,6 +2,8 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ankurksoni_dockerised-nest-app&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ankurksoni_dockerised-nest-app)
+
 ## Description
 
 We used,

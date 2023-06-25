@@ -14,7 +14,10 @@ services:
       retries: 2
 
   nest-app:
-    image: nest-cloud-run
+    # image: nest-cloud-run
+    build: .
+    volumes: 
+      - .:/opt/nest-cloud-run/
     restart: always
     ports:
       - 3000:3000

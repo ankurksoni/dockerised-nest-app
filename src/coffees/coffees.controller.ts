@@ -35,7 +35,6 @@ export class CoffeesController {
 
     @Delete(':id')
     async delete(@Param('id') id: number) {
-        const coffee = await this.findOne(id);
         return this.coffeeService.remove(id);
     }
 }
